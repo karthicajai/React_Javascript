@@ -1,3 +1,5 @@
+import Header from "./Header";
+import Footer from "./Footer";
 import AddItem from "./AddItem";
 import { useState, useEffect } from "react";
 
@@ -26,12 +28,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <AddItem 
-          newItem={newItem}
-          setNewItem={setNewItem}
-          handleSubmit={handleSubmit}></AddItem>
-      </header>
+      <Header title="Grocery List"> </Header>
+      <AddItem 
+        newItem={newItem}
+        setNewItem={setNewItem}
+        handleSubmit={handleSubmit}>
+      </AddItem>
+      <Footer length = {items.length}></Footer>
     </div>
   );
 }
