@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import AddItem from "./AddItem";
+import Content from "./Content";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -19,6 +20,16 @@ function App() {
     setAndSaveItems(listItems);
   }
 
+  const handleCheck = (id) => {
+    const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
+    setAndSaveItems(listItems);
+  }
+
+  const handleDelete = (id) => {
+    const listItems = items.filter((item) => item.id !== id);
+    setAndSaveItems(listItems);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if(!newItem) return; //TODO: show error msg to user
@@ -34,6 +45,9 @@ function App() {
         setNewItem={setNewItem}
         handleSubmit={handleSubmit}>
       </AddItem>
+      <Content items={items}
+        handleCheck={handleCheck}
+        handleDelete={handleDelete}></Content>
       <Footer length = {items.length}></Footer>
     </div>
   );
