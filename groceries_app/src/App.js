@@ -1,12 +1,14 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import AddItem from "./AddItem";
+import SearchItem from "./SearchItem";
 import Content from "./Content";
 import { useState, useEffect } from "react";
 
 function App() {
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')));
   const [newItem, setNewItem] = useState('');
+  const [search, setSearch] = useState('');
 
   const setAndSaveItems = (newItems) => {
     setItems(newItems);
@@ -32,7 +34,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!newItem) return; //TODO: show error msg to user
+    if(!newItem) return;
     addItem(newItem);
     setNewItem('');
   }
@@ -45,7 +47,10 @@ function App() {
         setNewItem={setNewItem}
         handleSubmit={handleSubmit}>
       </AddItem>
-      <Content items={items}
+      <SearchItem
+        search={search}
+        setSearch={setSearch}></SearchItem>
+      <Content items={items.filter( item => (item.item).toLowerCase().includes( search.toLocaleLowerCase() ) )}
         handleCheck={handleCheck}
         handleDelete={handleDelete}></Content>
       <Footer length = {items.length}></Footer>
