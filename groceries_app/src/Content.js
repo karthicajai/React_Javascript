@@ -3,11 +3,13 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 export default function Content({ items, handleCheck, handleDelete }) {
   return (
-    <main>
+    <>
         {items.length ? (
         <ul>
             {items.map((item) => (
-                <li className="item">
+                <li 
+                    key={item.id} 
+                    className="item">
                     <input
                         type="checkbox"
                         onChange={() => handleCheck(item.id)}
@@ -29,6 +31,6 @@ export default function Content({ items, handleCheck, handleDelete }) {
         ):(
             <p style={{ marginTop: '2rem' }}>Your list is empty.</p>
         )}
-    </main>
+    </>
   )
 }
