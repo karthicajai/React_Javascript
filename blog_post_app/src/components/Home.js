@@ -1,9 +1,16 @@
 import React from 'react'
+import Feed from './Feed'
 
-export default function Home() {
+export default function Home({posts}) {
   return (
-    <main>
-        Home
+    <main className="Home">
+        {posts.length ? (
+          <Feed posts={posts}></Feed>
+        ) : (
+          <p style={{ marginTop: "2rem" }}>
+              No posts to display.
+          </p>
+        )}
     </main>
   )
 }
