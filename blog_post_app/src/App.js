@@ -29,6 +29,8 @@ function App() {
 
   const [postTitle, setPostTitle] = useState('');
   const [postBody, setPostBody] = useState('');
+  const [search, setSearch] = useState('');
+  const [searchResults, setSearchResults] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -45,6 +47,16 @@ function App() {
     navigate('/');
   }
 
+  useEffect(() =>{
+    const filteredPosts = posts.filter(post => 
+      ((post.title).toLowerCase()).includes(search.toLowerCase()) 
+      || ((post.body).toLowerCase()).includes(search.toLowerCase())
+    );
+
+    setSearchResults(filteredPosts);
+
+  }, [posts, search]);
+
   const handleDelete = (id) => {
     const remPosts = posts.filter( post => post.id !== id);
     setPosts(remPosts);
@@ -56,10 +68,11 @@ function App() {
       <Routes>
         <Route path="/" element={
           <Layout
-
+            search={search}
+            setSearch={setSearch}
           />
         }>
-          <Route index element={<Home posts={posts} />} />
+          <Route index element={<Home posts={searchResults} />} />
 
           <Route path="post">
             <Route index element={
