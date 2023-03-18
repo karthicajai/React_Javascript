@@ -16,26 +16,14 @@ function App() {
     {
       id: 1,
       title: "My First Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
+      datetime: "January 01, 2022 11:17:36 AM",
+      body: "Hello world"
     },
     {
       id: 2,
       title: "My 2nd Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-    },
-    {
-      id: 3,
-      title: "My 3rd Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-    },
-    {
-      id: 4,
-      title: "My Fourth Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
+      datetime: "March 18, 2023 4:04:56 PM",
+      body: "Hello everyone"
     }
   ])
 
@@ -57,6 +45,12 @@ function App() {
     navigate('/');
   }
 
+  const handleDelete = (id) => {
+    const remPosts = posts.filter( post => post.id !== id);
+    setPosts(remPosts);
+    navigate('/');
+  }
+
   return (
     <div className="App">
       <Routes>
@@ -72,6 +66,12 @@ function App() {
               setPostBody={setPostBody}
             />
           }/>
+          <Route path=":id" element={
+            <PostPage
+              posts={posts}
+              handleDelete={handleDelete}
+            />}
+          />
         </Route> 
 
         <Route path="about" element={<About />} />
