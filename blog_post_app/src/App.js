@@ -1,5 +1,4 @@
 import Home from "./components/Home";
-import Nav from "./components/Nav";
 import NewPost from "./components/NewPost";
 import Footer from "./components/Footer";
 import About from "./pages/About";
@@ -8,6 +7,7 @@ import PostPage from "./pages/PostPage";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { format } from 'date-fns';
+import Layout from "./pages/Layout";
 
 
 function App() {
@@ -54,27 +54,33 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route index element={<Home posts={posts} />} />
+        <Route path="/" element={
+          <Layout
 
-        <Route path="post">
-          <Route index element={
-            <NewPost
-              handleSubmit={handleSubmit}
-              postTitle={postTitle}
-              setPostTitle={setPostTitle}
-              postBody={postBody}
-              setPostBody={setPostBody}
-            />
-          }/>
-          <Route path=":id" element={
-            <PostPage
-              posts={posts}
-              handleDelete={handleDelete}
-            />}
           />
-        </Route> 
+        }>
+          <Route index element={<Home posts={posts} />} />
 
-        <Route path="about" element={<About />} />
+          <Route path="post">
+            <Route index element={
+              <NewPost
+                handleSubmit={handleSubmit}
+                postTitle={postTitle}
+                setPostTitle={setPostTitle}
+                postBody={postBody}
+                setPostBody={setPostBody}
+              />
+            }/>
+            <Route path=":id" element={
+              <PostPage
+                posts={posts}
+                handleDelete={handleDelete}
+              />}
+            />
+          </Route> 
+
+          <Route path="about" element={<About />} />
+        </Route>
       </Routes>
     </div>
   );
